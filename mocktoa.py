@@ -3,7 +3,6 @@ import numpy as np
 import random
 import regex as re
 
-
 class Mocktoa:
 
     mockdata_json = None
