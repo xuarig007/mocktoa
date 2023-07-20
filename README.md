@@ -1,14 +1,15 @@
 # mocktoa
 Mocktoa is a very light project to generate mock data from setup jon file 
 
-Ce projet a été créé pour répondre à un problème de création de données "fake" pour des outils d'infrastructure comme influxdb pour générer régulièrement des données autour des serveurs et services dans les datacenters des clients
+This project was created to address a problem of creating "fake" data for infrastructure tools like influxdb to regularly generate data around servers and services in customer datacenters.
 
-Ce projet est sans prétention. Il permet grace à un fichier json de créer à partie de modème des fake data.
+This project is unpretentious. It uses a json file to create fake data from a model.
 
-Exemple1 : nous devons générer des lignes de saturation des filesystèmes pour les serveurs linux , sur les filesystems /tmp (4 fois sur 5) ou /var (1 fois sur 5), avec des seuils de saturation entre 80% et 100%. 
-Le texte de sortie sera par exemple : **Filesystem /tmp is 98% full**
+Example: we need to generate filesystem saturation lines for Linux servers, on /tmp (4 times out of 5) or /var (1 time out of 5) filesystems, with saturation thresholds between 80% and 100%. 
 
-Fichier mocktoa.json :
+**The output text will be, for example: Filesystem /tmp is 98% full**
+
+File mocktoa.json :
 ```json
 {
     "schemas" : { 
@@ -33,7 +34,7 @@ Fichier mocktoa.json :
 }
 ```
 
-Exemple de script python pour générer un fake
+Example of a python script to generate a fake
 
 ``` python
 import mocktoa
