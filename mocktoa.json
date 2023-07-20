@@ -1,0 +1,107 @@
+{
+    "schemas" : { 
+        "event_filesystem_linux" : [
+            { "field" : "type", "type" : "template", "value" : "filesystem"},
+            { "field" : "value", "type" : "list", "value" : ["/tmp","/var"], "weights" : [ 4, 1 ] },
+            { "field" : "percentage", "type" : "number", "min" : 80, "max" : 100 },
+            { "field" : "text", "type" : "template", "value" : "Filesystem {value} is {percentage}% full"}
+        ],
+        "event_filesystem_windows" : [
+            { "field" : "type", "type" : "template", "value" : "filesystem"},
+            { "field" : "value", "type" : "list", "value" : ["C:/","D:/","E:/"], "weights" : [ 5,4,1 ] },
+            { "field" : "percentage", "type" : "number", "min" : 80, "max" : 100 },
+            { "field" : "text", "type" : "template", "value" : "Windows Disk {value} is {percentage}% full"}
+        ],
+        "event_inode_linux" : [
+            { "field" : "type", "type" : "template", "value" : "inode"},
+            { "field" : "value", "type" : "list", "value" : ["/tmp","/var"], "weights" : [ 1,1 ] },
+            { "field" : "percentage", "type" : "number", "min" : 80, "max" : 100 },
+            { "field" : "text", "type" : "template", "value" : "Number of inodes on filesystem {value} : {percentage}%"}
+        ],
+        "event_cpu_linux" : [
+            { "field" : "type", "type" : "template", "value" : "cpu"},
+            { "field" : "percentage", "type" : "number", "min" : 80, "max" : 100 },
+            { "field" : "text", "type" : "template", "value" : "CPU used : {percentage}%"}
+        ],
+        "event_cpu_windows" : [
+            { "field" : "type", "type" : "template", "value" : "cpu"},
+            { "field" : "percentage", "type" : "number", "min" : 80, "max" : 100 },
+            { "field" : "text", "type" : "template", "value" : "CPU used : {percentage}%"}
+        ],
+        "event_memory_linux" : [
+            { "field" : "type", "type" : "template", "value" : "memory"},
+            { "field" : "percentage", "type" : "number", "min" : 80, "max" : 100 },
+            { "field" : "text", "type" : "template", "value" : "RAM used : {percentage}%"}
+        ],
+        "event_memory_windows" : [
+            { "field" : "type", "type" : "template", "value" : "memory"},
+            { "field" : "percentage", "type" : "number", "min" : 80, "max" : 100 },
+            { "field" : "text", "type" : "template", "value" : "RAM used : {percentage}%"}
+        ],
+        "event_java" : [
+            { "field" : "type", "type" : "template", "value" : "java"},
+            { "field" : "exception", "type" : "list", "value" : ["not data found","null pointer exception", "division by zero"], "weights" : [ 1, 10,2 ] },
+            { "field" : "program_name", "type" : "list", "value" : ["eclipse","postman"], "weights" : [ 1, 2 ] },
+            { "field" : "text", "type" : "template", "value" : "Java program { program_name} failed with the exception {exception}"}
+        ]
+    },
+    "fake": {
+        "filesystem" : {
+            "choice" : 0.6,
+            "classes" : [
+                {
+                    "typeOs" : "Linux Server",
+                    "mockSchema" : "event_filesystem_linux"
+                },
+                {
+                    "typeOs" : "Windows Server",
+                    "mockSchema" : "event_filesystem_windows"
+                }
+            ]
+        },
+        "inode" : {
+            "choice" : 0.1,
+            "classes": [
+                {
+                    "typeOs" : "Linux Server",
+                    "mockSchema" : "event_inode_linux"
+                }
+            ]
+        },
+        "cpu" : {
+            "choice" : 0.1,
+            "classes": [
+                {
+                    "typeOs" : "Linux Server",
+                    "mockSchema" : "event_cpu_linux"
+                },
+                {
+                    "typeOs" : "Windows Server",
+                    "mockSchema" : "event_cpu_windows"
+                }
+            ]
+        },
+        "memory" : {
+            "choice" : 0.1,
+            "classes": [
+                {
+                    "typeOs" : "Linux Server",
+                    "mockSchema" : "event_memory_linux"
+                },
+                {
+                    "typeOs" : "Windows Server",
+                    "mockSchema" : "event_memory_windows"
+                }
+            ]
+        },
+        "java" : {
+            "choice" : 0.1,
+            "classes": [
+                {
+                    "typeOs" : "Linux Server",
+                    "mockSchema" : "event_weblo"
+                }
+            ]
+        }
+    }
+}
