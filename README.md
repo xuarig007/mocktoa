@@ -7,7 +7,7 @@ This project is unpretentious. It uses a json file to create fake data from a mo
 
 Example: we need to generate filesystem saturation lines for Linux servers, on /tmp (4 times out of 5) or /var (1 time out of 5) filesystems, with saturation thresholds between 80% and 100%. 
 
-**The output text will be, for example: Filesystem /tmp is 98% full**
+The output text will be, for example: **Filesystem /tmp is 98% full**
 
 File mocktoa.json :
 ```json
