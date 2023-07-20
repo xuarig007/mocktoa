@@ -1,9 +1,6 @@
 import json
-import os
 import numpy as np
-from datetime import datetime
 import random
-import time
 import regex as re
 
 
@@ -14,13 +11,16 @@ class Mocktoa:
     fake = None
 
     def __init__(self):
-        self.json_file=open("mockdata.json","r")
+        self.json_file=open("mocktoa.json","r")
         self.mockdata_json=json.load(self.json_file)
         self.schemas=self.mockdata_json["schemas"]
         self.fake=self.mockdata_json["fake"]
 
     def get_keys(self):
         return self.fake.keys()
+    
+    def get_random_type(self):
+        return np.random.choice(list(self.get_keys()),p=[self.fake[x]["choice"] for x in self.get_keys()])
 
     def get_data_from_type(self,type,typeOs):
         data=None
@@ -29,7 +29,6 @@ class Mocktoa:
         if typeOs in [x["typeOs"] for x in self.fake[type]["classes"]]:
             index_classe = classes.index(typeOs)
             schema=[x["mockSchema"] for x in self.fake[type]["classes"]][index_classe]
-            print("Récupération d'une fake data")
             data = self.getDataFromJson(schema)
         return data
 
@@ -57,6 +56,8 @@ class Mocktoa:
             minNumber=schema_setup["min"] if "min" in schema_setup else 0
             maxNumber=schema_setup["max"] if "max" in schema_setup else 1
             weights=schema_setup["weights"] if "weights" in schema_setup else None
+
+            # print(f"field = {field}, type = {type}, value = {value}")
 
             if field == None:
                 return None
